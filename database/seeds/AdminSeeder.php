@@ -19,6 +19,7 @@ class AdminSeeder extends Seeder
             'password' => \Illuminate\Support\Facades\Hash::make('password'),
             'birth_date' => '1993-04-15 00:00:00',
             'address' => 'Mountain View, California',
+            'api_token' => str_random(60),
         ));
     }
 }

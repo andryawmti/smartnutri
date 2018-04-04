@@ -22,6 +22,7 @@ class UserSeeder extends Seeder
             'pregnancy_start_at' => '2018-04-01 10:43:42',
             'blood_type' => 'AB',
             'weight' => '156',
+            'api_token' => str_random(60),
         ));
     }
 }
