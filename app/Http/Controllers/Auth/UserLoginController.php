@@ -66,15 +66,16 @@ class UserLoginController extends Controller
      */
     public function userLogout(Request $request)
     {
-        $api_logout = $this->apiLogout();
-        return $api_logout;
+        $user = Auth::guard('user')->user();
+        $api_logout = $this->apiLogout($user);
         Auth::guard('user')->logout();
-        return redirect('/user/login');
+//        return redirect('/user/login');
+        return $api_logout;
     }
 
-    public function apiLogout()
+    public function apiLogout($user)
     {
-        $user = Auth::guard('user-api')->user();
+//        $user = Auth::guard('user-api')->user();
         if ($user) {
             $user->api_token = null;
             $user->save();
