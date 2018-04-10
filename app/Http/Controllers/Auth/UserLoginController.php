@@ -81,7 +81,7 @@ class UserLoginController extends Controller
             $user->save();
         }
 
-        return response()->json(['data'=>'User logged out', 'user' => $user], 201);
+        return response()->json(['error'=>false,'data'=>'User logged out', 'user' => $user], 201);
     }
 
     public function userLogin(Request $request)
