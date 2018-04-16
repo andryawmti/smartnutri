@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -76,6 +77,19 @@ class UserController extends Controller
 
         return response()->json(array(
             'message' => 'User not found'
+        ));
+    }
+
+    public function updatePassword(Request $request, $id)
+    {
+        $user = User::find($id);
+        $user->password = Hash::make($request->input('password'));
+        $user->save();
+
+        return response()->json(array(
+            'error' => false,
+            'message'=> 'Password successfully updated',
+            'user' => $user,
         ));
     }
 }
