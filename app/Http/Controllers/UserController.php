@@ -32,10 +32,10 @@ class UserController extends Controller
         $user = User::find($id);
         $user->first_name = $request->input('first_name');
         $user->last_name = $request->input('last_name');
-        $user->address = $request->input('address');
-        $user->email = $request->input('email');
+//        $user->address = $request->input('address');
+//        $user->email = $request->input('email');
 //        $user->birth_date = $request->input('birth_date');
-        $user->weight = $request->input('weight');
+//        $user->weight = $request->input('weight');
 //        $user->pregnancy_start_at = $request->input('pregnancy_start');
         $user->save();
 
