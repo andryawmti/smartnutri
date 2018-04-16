@@ -41,7 +41,8 @@ class UserController extends Controller
 
         return response()->json(array(
             'error' => false,
-            'message'=> 'User successfully updated'
+            'message'=> 'User successfully updated',
+            'user' => $user,
         ));
     }
 
