@@ -34,9 +34,9 @@ class UserController extends Controller
         $user->last_name = $request->input('last_name');
         $user->address = $request->input('address');
         $user->birth_date = $request->input('birth_date');
-        $user->password = $request->input('password');
+//        $user->password = $request->input('password');
         $user->wieght = $request->input('weight');
-        $user->blood_type = $request->input('blood_type');
+//        $user->blood_type = $request->input('blood_type');
         $user->pregnancy_start_at = $request->input('pregnancy_start');
         $user->save();
 
