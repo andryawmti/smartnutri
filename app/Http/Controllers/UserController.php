@@ -36,7 +36,7 @@ class UserController extends Controller
         $user->email = $request->input('email');
         $user->birth_date = $request->input('birth_date');
 //        $user->weight = $request->input('weight');
-//        $user->pregnancy_start_at = $request->input('pregnancy_start');
+        $user->pregnancy_start_at = $request->input('pregnancy_start');
         $user->save();
 
         return response()->json(array(
