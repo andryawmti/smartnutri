@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Fileentry;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -92,4 +95,32 @@ class UserController extends Controller
             'user' => $user,
         ));
     }
+
+    public function uploadPhoto(Request $request, $id)
+    {
+        $file = Request::file('photo_profile');
+        $extension = $file->getClientOriginalExtension();
+        $file_name = $unique_name = md5($file->getFilename() . time());
+        Storage::disk('local')->put($file_name.'.'.$extension, File::get($file));
+
+        $user = User::find($id);
+        $user->photo = $file_name.".".$extension;
+        $user->photo_mime = $file->getClientMimeType();
+        $user->save();
+
+        return response()->json(array(
+            'error' => false,
+            'message'=> 'Photo profile successfully updated',
+            'user' => $user,
+        ));
+    }
+
+    /*public function getFile($filename){
+
+        $entry = Fileentry::where('filename', '=', $filename)->firstOrFail();
+        $file = Storage::disk('local')->get($entry->filename);
+
+        return (new Response($file, 200))
+            ->header('Content-Type', $entry->mime);
+    }*/
 }
