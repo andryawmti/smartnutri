@@ -99,7 +99,8 @@ class UserController extends Controller
         if ($request->hasFile("image")){
             $path = Storage::putFile("public/images", $request->file("image"));
             $user = User::find($id);
-            $user->photo = $path;
+            $file_url = Storage::url($path);
+            $user->photo = $file_url;
             $user->photo_mime = $request->file("image")->getClientMimeType();
             $user->save();
 
