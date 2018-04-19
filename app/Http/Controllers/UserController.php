@@ -117,4 +117,11 @@ class UserController extends Controller
         ));
     }
 
+    public function getPhotoProfileUrl(Request $request, $id)
+    {
+        $user = User::find($id);
+        $url = Storage::url($user->photo);
+        return $url;
+    }
+
 }
