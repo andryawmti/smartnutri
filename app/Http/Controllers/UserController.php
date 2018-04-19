@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Fileentry;
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -98,15 +95,20 @@ class UserController extends Controller
 
     public function uploadPhoto(Request $request, $id)
     {
-        $file = Request::file('photo_profile');
-        $extension = $file->getClientOriginalExtension();
-        $file_name = $unique_name = md5($file->getFilename() . time());
-        Storage::disk('local')->put($file_name.'.'.$extension, File::get($file));
+        if ($request->hasFile("image")){
+            $fileNameWithEx = $request->file('image')->getClientOriginalName();
+            $fileName = pathinfo($fileNameWithEx, PATHINFO_FILENAME);
+            $extension = $request->file('image')->getClientOriginalExtension();
+            $fileNameToStore =  md5($fileName.time()).".".$extension;
+            $path = $request->file('image')->storeAs("public/photo_profiles", $fileNameToStore);
+            $user = User::find($id);
+            $user->photo = $path;
+            $user->photo_mime = $request->file("image")->getClientMimeType();
+            $user->save();
 
-        $user = User::find($id);
-        $user->photo = $file_name.".".$extension;
-        $user->photo_mime = $file->getClientMimeType();
-        $user->save();
+        }else{
+            return "fuck you";
+        }
 
         return response()->json(array(
             'error' => false,
