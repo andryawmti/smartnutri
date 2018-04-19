@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -15,7 +16,7 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth:user-api'],['except'=>['index']]);
+//        $this->middleware(['auth:user-api'],['except'=>['index']]);
     }
 
     /**
@@ -96,18 +97,17 @@ class UserController extends Controller
     public function uploadPhoto(Request $request, $id)
     {
         if ($request->hasFile("image")){
-            $fileNameWithEx = $request->file('image')->getClientOriginalName();
-            $fileName = pathinfo($fileNameWithEx, PATHINFO_FILENAME);
-            $extension = $request->file('image')->getClientOriginalExtension();
-            $fileNameToStore =  md5($fileName.time()).".".$extension;
-            $path = $request->file('image')->storeAs("public/photo_profiles", $fileNameToStore);
+            $path = Storage::putFile("public/images", $request->file("image"));
             $user = User::find($id);
             $user->photo = $path;
             $user->photo_mime = $request->file("image")->getClientMimeType();
             $user->save();
 
         }else{
-            return "fuck you";
+            return response()->json(array(
+                'error' => true,
+                'message'=> 'No file choosed'
+            ));
         }
 
         return response()->json(array(
@@ -117,12 +117,4 @@ class UserController extends Controller
         ));
     }
 
-    /*public function getFile($filename){
-
-        $entry = Fileentry::where('filename', '=', $filename)->firstOrFail();
-        $file = Storage::disk('local')->get($entry->filename);
-
-        return (new Response($file, 200))
-            ->header('Content-Type', $entry->mime);
-    }*/
 }

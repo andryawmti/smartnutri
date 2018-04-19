@@ -21,6 +21,7 @@ Route::prefix('user')->group(function (){
     Route::get('/login', 'Auth\UserLoginController@showLoginForm')->name('user.login');
     Route::post('/login', 'Auth\UserLoginController@userLogin')->name('user.login.submit');
     Route::post('/logout', 'Auth\UserLoginController@userLogout')->name('user.logout');
+    Route::post('/{id}/upload', 'UserController@uploadPhoto')->name('user.upload');
     Route::get('/', 'UserController@index')->name('dashboard');
 });
 
