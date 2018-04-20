@@ -20,7 +20,7 @@ class ResetPassword extends Mailable
     {
         //
     }
-d
+
     /**
      * Build the message.
      *
