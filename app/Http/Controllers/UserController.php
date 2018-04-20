@@ -85,11 +85,19 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->password = Hash::make($request->input('password'));
-        $user->save();
+        $save = $user->save();
+
+        if ($save) {
+            $error = false;
+            $message = "Password successfully updated";
+        } else {
+            $error = true;
+            $message = "Password update failed";
+        }
 
         return response()->json(array(
-            'error' => false,
-            'message'=> 'Password successfully updated',
+            'error' => $error,
+            'message'=> $message,
             'user' => $user,
         ));
     }
@@ -102,7 +110,21 @@ class UserController extends Controller
             $file_url = Storage::url($path);
             $user->photo = $file_url;
             $user->photo_mime = $request->file("image")->getClientMimeType();
-            $user->save();
+            $save = $user->save();
+
+            if ($save) {
+                $error = false;
+                $message = "Photo profile successfully updated";
+            } else {
+                $error = true;
+                $message = "Photo profile updated failed";
+            }
+
+            return response()->json(array(
+                'error' => $error,
+                'message'=> $message,
+                'user' => $user,
+            ));
 
         }else{
             return response()->json(array(
@@ -111,11 +133,6 @@ class UserController extends Controller
             ));
         }
 
-        return response()->json(array(
-            'error' => false,
-            'message'=> 'Photo profile successfully updated',
-            'user' => $user,
-        ));
     }
 
     public function getPhotoProfileUrl(Request $request, $id)
