@@ -81,7 +81,7 @@ class UserLoginController extends Controller
             $user->save();
         }
 
-        return response()->json(['error'=>false,'message'=>'User logged out', 'user' => $user], 201);
+        return response()->json(['error'=>false,'message'=>'User logged out', 'user' => $this->getUserForAndroid($user)], 201);
     }
 
     public function userLogin(Request $request)
@@ -103,7 +103,7 @@ class UserLoginController extends Controller
             return response()->json(array(
                 'error' => false,
                 'message' => 'login successful',
-                'user' => $user
+                'user' => $this->getUserForAndroid($user),
             ));
         }
 
@@ -111,5 +111,13 @@ class UserLoginController extends Controller
             'error' => true,
             'message' => 'login failed, credentials not match',
         ));
+    }
+
+    public function getUserForAndroid(User $user){
+        $birth_date = $user->birth_date;
+        $pregnancy_start = $user->pregnancy_start_at;
+        $user->birth_date = date("Y-m-d", strtotime($birth_date));
+        $user->pregnancy_start_at = date("Y-m-d", strtotime($pregnancy_start));
+        return $user;
     }
 }

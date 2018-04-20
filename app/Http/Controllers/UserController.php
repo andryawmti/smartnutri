@@ -44,7 +44,7 @@ class UserController extends Controller
         return response()->json(array(
             'error' => false,
             'message'=> 'User successfully updated',
-            'user' => $user,
+            'user' => $this->getUserForAndroid($user),
         ));
     }
 
@@ -57,7 +57,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         if ($user) {
-            return response()->json($user);
+            return response()->json($this->getUserForAndroid($user));
         }
 
         return response()->json(array(
@@ -73,7 +73,7 @@ class UserController extends Controller
     {
         $users = User::all();
         if (count($users) > 0) {
-            return response()->json($users);
+            return response()->json($this->getUserForAndroid($user));
         }
 
         return response()->json(array(
@@ -98,7 +98,7 @@ class UserController extends Controller
         return response()->json(array(
             'error' => $error,
             'message'=> $message,
-            'user' => $user,
+            'user' => $this->getUserForAndroid($user),
         ));
     }
 
@@ -123,7 +123,7 @@ class UserController extends Controller
             return response()->json(array(
                 'error' => $error,
                 'message'=> $message,
-                'user' => $user,
+                'user' => $this->getUserForAndroid($user),
             ));
 
         }else{
@@ -140,6 +140,14 @@ class UserController extends Controller
         $user = User::find($id);
         $url = Storage::url($user->photo);
         return $url;
+    }
+
+    public function getUserForAndroid(User $user){
+        $birth_date = $user->birth_date;
+        $pregnancy_start = $user->pregnancy_start_at;
+        $user->birth_date = date("Y-m-d", strtotime($birth_date));
+        $user->pregnancy_start_at = date("Y-m-d", strtotime($pregnancy_start));
+        return $user;
     }
 
 }
