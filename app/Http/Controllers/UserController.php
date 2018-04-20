@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ResetPassword;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -16,7 +18,7 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth:user-api'],['except'=>['index']]);
+        $this->middleware(['auth:user-api'],['except'=>['index','resetPassword']]);
     }
 
     /**
@@ -148,6 +150,12 @@ class UserController extends Controller
         $user->birth_date = date("Y-m-d", strtotime($birth_date));
         $user->pregnancy_start_at = date("Y-m-d", strtotime($pregnancy_start));
         return $user;
+    }
+
+    public function resetPassword()
+    {
+        $send = Mail::to("andri@niagahoster.co.id")->send(new ResetPassword());
+        return json_encode($send);
     }
 
 }

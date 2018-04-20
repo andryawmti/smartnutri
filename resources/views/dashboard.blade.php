@@ -15,6 +15,18 @@
                     @endif
 
                     You are logged in!
+
+                        <form action="{{ url('/user/1/upload') }}" method="post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="id" value="1">
+                            </div>
+                            <div class="form-group">
+                                <input type="file" class="form-control" name="image">
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-info" type="submit">Upload</button>
+                            </div>
+                        </form>
                 </div>
             </div>
         </div>
