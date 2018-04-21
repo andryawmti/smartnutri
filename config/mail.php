@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.gmail.com'),
+    'host' => env('MAIL_HOST', 'dadadasnoopdog.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'andryavera@gmail.com'),
+        'address' => env('MAIL_FROM_ADDRESS', 'support@dev2.dadadasnoopdog.com'),
         'name' => env('MAIL_FROM_NAME', 'SmartNutri'),
     ],
 
@@ -71,7 +71,7 @@ return [
     |
     */
 
-    'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+    'encryption' => env('MAIL_ENCRYPTION', 'STARTTLS'),
 
     /*
     |--------------------------------------------------------------------------
@@ -84,9 +84,9 @@ return [
     |
     */
 
-    'username' => env('MAIL_USERNAME', 'andryavera@gmail.com'),
+    'username' => env('MAIL_USERNAME', 'support@dev2.dadadasnoopdog.com'),
 
-    'password' => env('MAIL_PASSWORD', 'missyoudara1412$$$'),
+    'password' => env('MAIL_PASSWORD', 'smartnutri'),
 
     /*
     |--------------------------------------------------------------------------

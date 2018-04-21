@@ -159,7 +159,7 @@ class UserController extends Controller
         $user = User::where('email', '=', $email)->first();
         if ( isset($user) ) {
             $newPassword = str_random(8);
-            $send = Mail::to("andri@niagahoster.co.id")->send(new ResetPassword($newPassword));
+            $send = Mail::to("andryavera@gmail.com")->send(new ResetPassword($newPassword));
             if (Mail::failures()) {
                 return json_encode(array(
                     "error" => true,
