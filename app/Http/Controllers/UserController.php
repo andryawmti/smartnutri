@@ -152,12 +152,11 @@ class UserController extends Controller
         return $user;
     }
 
-    public function resetPassword(Request $request, $id)
+    public function resetPassword(Request $request)
     {
         $email = $request->input('email');
-        $findUser = User::where('email', '=', $email)->count();
-        if ( $findUser > 0 ) {
-            $user = User::find($id);
+        $user = User::where('email', '=', $email)->first();
+        if ( $user ) {
             $newPassword = str_random(8);
             $send = Mail::to("andri@niagahoster.co.id")->send(new ResetPassword($newPassword));
             if (Mail::failures()) {
