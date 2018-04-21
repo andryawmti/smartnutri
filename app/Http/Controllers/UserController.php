@@ -35,6 +35,7 @@ class UserController extends Controller
     public function updateUser(Request $request, $id)
     {
         $user = User::find($id);
+        return json_encode($user);
         $user->first_name = $request->input('first_name');
         $user->last_name = $request->input('last_name');
         $user->address = $request->input('address');
