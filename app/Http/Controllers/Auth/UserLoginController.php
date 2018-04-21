@@ -81,7 +81,7 @@ class UserLoginController extends Controller
             $user->save();
         }
 
-        return response()->json(['error'=>false,'message'=>'User logged out', 'user' => $this->getUserForAndroid($user)], 201);
+        return response()->json(['error'=>false,'message'=>'User logged out',], 201);
     }
 
     public function userLogin(Request $request)
