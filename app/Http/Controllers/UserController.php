@@ -157,8 +157,7 @@ class UserController extends Controller
     {
         $email = $request->input('email');
         $user = User::where('email', '=', $email)->first();
-        return json_encode($user);
-        if ( count($user) > 0 ) {
+        if ( isset($user) ) {
             $newPassword = str_random(8);
             $send = Mail::to("andri@niagahoster.co.id")->send(new ResetPassword($newPassword));
             if (Mail::failures()) {
@@ -168,8 +167,8 @@ class UserController extends Controller
                 ));
             }
 
-            $user[0]->password = Hash::make($newPassword);
-            $user[0]->save();
+            $user->password = Hash::make($newPassword);
+            $user->save();
 
             return json_encode(array(
                 "error" => false,
