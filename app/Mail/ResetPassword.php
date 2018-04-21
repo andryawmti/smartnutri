@@ -17,9 +17,9 @@ class ResetPassword extends Mailable
      *
      * @param string $newPassword
      */
-    public function __construct(string $newPassword)
+    public function __construct(string $password)
     {
-        $this->newPassword = $newPassword;
+        $this->newPassword = $password;
     }
 
     /**

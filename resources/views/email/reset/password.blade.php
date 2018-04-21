@@ -1,7 +1,7 @@
 @component('mail::message')
 # This is your new password
 
-Password: {{newPassword}}
+Password: {{ $newPassword }}
 
 Please ignore this email, if you never authorize the reset password request.
 
