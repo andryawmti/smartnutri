@@ -156,7 +156,7 @@ class UserController extends Controller
     {
         $email = $request->input('email');
         $findUser = User::where('email', '=', $email)->count();
-
+        return $findUser;
         if ( $findUser > 0 ) {
             $user = User::find($id);
             $newPassword = str_random(8);
