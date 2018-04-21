@@ -152,10 +152,25 @@ class UserController extends Controller
         return $user;
     }
 
-    public function resetPassword()
+    public function resetPassword(Request $request, $id)
     {
-        $send = Mail::to("andri@niagahoster.co.id")->send(new ResetPassword());
-        return json_encode($send);
+        $user = User::find($id);
+        $newPassword = str_random(8);
+        $send = Mail::to("andri@niagahoster.co.id")->send(new ResetPassword($newPassword));
+        if (Mail::failures()) {
+            return json_encode(array(
+                "error" => true,
+                "message" => "Email was not sent"
+            ));
+        }
+
+        $user->password = Hash::make($newPassword);
+        $user->save();
+
+        return json_encode(array(
+            "error" => false,
+            "message" => "Message has been sent"
+        ));
     }
 
 }

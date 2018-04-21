@@ -1,11 +1,9 @@
 @component('mail::message')
-# Introduction
+# This is your new password
 
-The body of your message.
+Password: {{newPassword}}
 
-@component('mail::button', ['url' => ''])
-Button Text
-@endcomponent
+Please ignore this email, if you never authorize the reset password request.
 
 Thanks,<br>
 {{ config('app.name') }}
