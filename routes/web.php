@@ -19,6 +19,7 @@ Route::get('/', function(){
 
 Route::prefix('user')->group(function (){
     Route::post('/signup', 'UserController@signUp');
+    Route::post('/reset-password', 'UserController@resetPassword');
     Route::get('/login', 'Auth\UserLoginController@showLoginForm')->name('user.login');
     Route::post('/login', 'Auth\UserLoginController@userLogin')->name('user.login.submit');
     Route::post('/logout', 'Auth\UserLoginController@userLogout')->name('user.logout');
