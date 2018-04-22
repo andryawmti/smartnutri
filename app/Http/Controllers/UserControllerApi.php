@@ -185,12 +185,12 @@ class UserControllerApi extends Controller
 
     public function signUp(Request $request)
     {
+        return "fuck you";
         $user = new User();
         $user->first_name = $request->input("first_name");
         $user->last_name = $request->input("last_name");
         $user->email = $request->input("email");
         $user->password = $request->input("password");
-        return json_encode($user);
         $save = $user->save();
         if ($save) {
             return response()->json(array(
