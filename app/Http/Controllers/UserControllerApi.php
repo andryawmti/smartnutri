@@ -190,6 +190,7 @@ class UserControllerApi extends Controller
         $user->last_name = $request->input("last_name");
         $user->email = $request->input("email");
         $user->password = $request->input("password");
+        return json_encode($user);
         $save = $user->save();
         if ($save) {
             return response()->json(array(
