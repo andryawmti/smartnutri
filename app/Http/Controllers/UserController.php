@@ -19,7 +19,7 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        return $this->middleware('guest:user');
+        $this->middleware('guest:user');
     }
 
     /**
