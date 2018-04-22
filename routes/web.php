@@ -24,7 +24,6 @@ Route::prefix('user')->group(function (){
     Route::post('/login', 'Auth\UserLoginController@userLogin')->name('user.login.submit');
     Route::post('/logout', 'Auth\UserLoginController@userLogout')->name('user.logout');
     Route::post('/{id}/upload', 'UserController@uploadPhoto')->name('user.upload');
-    Route::get('/reset-password/{id}', 'UserController@resetPassword')->name('user.reset.password');
     Route::get('/', 'UserController@index')->name('dashboard');
 });
 

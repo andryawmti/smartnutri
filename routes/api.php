@@ -14,7 +14,6 @@ use Illuminate\Http\Request;
 */
 
 Route::group(['middleware'=>'auth:user-api'], function(){
-    Route::post('/user/reset-password', 'UserControllerApi@resetPassword');
     Route::get('/user/{id}', 'UserControllerApi@getUser');
     Route::post('/user/{id}', 'UserControllerApi@updateUser');
     Route::post('/user/{id}/password', 'UserControllerApi@updatePassword');
