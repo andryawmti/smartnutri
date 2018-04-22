@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->dateTime('pregnancy_start_at');
             $table->string('blood_type', 25);
             $table->string('weight', 10);
+            $table->string('height', 10);
             $table->rememberToken();
             $table->timestamps();
         });

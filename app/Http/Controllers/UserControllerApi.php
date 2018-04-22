@@ -111,11 +111,19 @@ class UserControllerApi extends Controller
             $path = Storage::putFile("public/images", $request->file("image"));
             $user = User::find($id);
             $file_url = Storage::url($path);
+
+            if ($user->photo != null) {
+                $old_photo = $user->photo;
+            }
+
             $user->photo = $file_url;
             $user->photo_mime = $request->file("image")->getClientMimeType();
             $save = $user->save();
 
             if ($save) {
+                if (isset($old_photo)) {
+                    unlink(url($old_photo));
+                }
                 $error = false;
                 $message = "Photo profile successfully updated";
             } else {
