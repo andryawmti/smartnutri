@@ -19,7 +19,7 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth:user-api'],['except'=>['index','resetPassword']]);
+        $this->middleware(['auth:user-api'],['except'=>['index','resetPassword','signUp']]);
     }
 
     /**
