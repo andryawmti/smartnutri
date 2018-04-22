@@ -77,18 +77,27 @@ class UserController extends Controller
         $user->last_name = $request->input("last_name");
         $user->email = $request->input("email");
         $user->password = $request->input("password");
-        $save = $user->save();
-        if ($save) {
-            return response()->json(array(
-                'error' => false,
-                'message'=> 'You signed up successfully',
-            ));
-        }else{
+
+        try{
+            $save = $user->save();
+            if ($save) {
+                return response()->json(array(
+                    'error' => false,
+                    'message'=> 'You signed up successfully',
+                ));
+            }else{
+                return response()->json(array(
+                    'error' => true,
+                    'message'=> 'Sign up failed',
+                ));
+            }
+        }catch(\Exception $e){
             return response()->json(array(
                 'error' => true,
-                'message'=> 'Sign up failed',
+                'message'=> $e->getMessage(),
             ));
         }
+
     }
 
 }
