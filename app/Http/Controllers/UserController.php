@@ -72,7 +72,6 @@ class UserController extends Controller
 
     public function signUp(Request $request)
     {
-        return "fuck you";
         $user = new User();
         $user->first_name = $request->input("first_name");
         $user->last_name = $request->input("last_name");
