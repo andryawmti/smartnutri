@@ -27,6 +27,7 @@ class CreateUsersTable extends Migration
             $table->string('height', 10);
             $table->rememberToken();
             $table->timestamps();
+            $table->string('api_token', 60);
         });
     }
 
