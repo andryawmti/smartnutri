@@ -1,0 +1,180 @@
+{%extends 'layouts.layout_admin'%}
+{%block page_title%}User Edit{%endblock%}
+
+{%block page_style%}
+<link rel="stylesheet" href="{{asset('angleadmin/vendor/bootstrap-tagsinput/dist/bootstrap-tagsinput.css')}}">
+<!-- SLIDER CTRL-->
+<link rel="stylesheet" href="{{asset('angleadmin/vendor/bootstrap-slider/dist/css/bootstrap-slider.css')}}">
+<!-- CHOSEN-->
+<link rel="stylesheet" href="{{asset('angleadmin/vendor/chosen-js/chosen.css')}}">
+<!-- COLORPICKER-->
+<link rel="stylesheet" href="{{asset('angleadmin/vendor/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css')}}">
+<!-- SELECT2-->
+<link rel="stylesheet" href="{{asset('angleadmin/vendor/select2/dist/css/select2.css')}}">
+<link rel="stylesheet" href="{{asset('angleadmin/vendor/select2-bootstrap-theme/dist/select2-bootstrap.css')}}">
+<!-- WYSIWYG-->
+<link rel="stylesheet" href="{{asset('angleadmin/vendor/bootstrap-wysiwyg/css/style.css')}}">
+{%endblock%}
+
+{%block main_content%}
+<section class="section-container">
+    <!-- Page content-->
+    <div class="content-wrapper">
+        <div class="content-heading">
+            <div>Edit User
+                <small>You can edit user here.</small>
+            </div>
+        </div>
+        <!-- START row-->
+        <div class="row">
+
+            <div class="col-lg-12">
+                <form id="create-user" class="form-horizontal" enctype="multipart/form-data" method="POST" action="{{url('/admin/user')}}/{{user.id}}" data-parsley-validate="" novalidate="">
+                    <!-- START card-->
+                    <div class="card card-default">
+                        {#<div class="card-header">
+                        <div class="card-title">Fields validation</div>
+                    </div>#}
+                        <div class="card-body">
+                            {#<legend class="mb-4">Type validation</legend>#}
+                            {{csrf_field()}}
+                            <input type="hidden" name="_method" value="PUT">
+                            <fieldset>
+                                <div class="form-group row">
+                                    <label class="col-md-2 col-form-label">First Name*</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" name="first_name" required="required" value="{{user.first_name}}">
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-group row">
+                                    <label class="col-md-2 col-form-label">Last Name</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" name="last_name" value="{{user.last_name}}">
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-group row">
+                                    <label class="col-md-2 col-form-label">Email*</label>
+                                    <div class="col-md-6">
+                                        <input class="form-control" type="email" name="email" value="{{user.email}}" data-parsley-type="email" required="required">
+                                    </div>
+                                </div>
+                            </fieldset>
+                            {#<fieldset>
+                                <div class="form-group row">
+                                    <label class="col-md-2 col-form-label">Password*</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" name="password" value="{{user.password}}" required="required" data-parsley-minlength="6" data-parsley-maxlength="25">
+                                    </div>
+                                </div>
+                            </fieldset>#}
+                            <fieldset>
+                                <div class="form-group row">
+                                    <label class="col-md-2 col-form-label">Address</label>
+                                    <div class="col-md-6">
+                                        <textarea name="address" id="" cols="30" rows="10" class="form-control">{{user.address}}</textarea>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-group row">
+                                    <label class="col-md-2 col-form-label mb-2">Birth Date*</label>
+                                    <div class="col-xl-6 col-10">
+                                        <div class="input-group date">
+                                            <input class="form-control my-datepicker" name="birth_date" required="required" readonly value="{{user.birth_date | date('Y-m-d')}}" type="text">
+                                            <span class="input-group-append input-group-addon">
+                                                <span class="input-group-text fa fa-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-group row">
+                                    <label class="col-md-2 col-form-label mb-2">Pregnancy Start*</label>
+                                    <div class="col-xl-6 col-10">
+                                        <div class="input-group date">
+                                            <input class="form-control my-datepicker" name="pregnancy_start_at" required="required" readonly value="{{user.pregnancy_start_at | date('Y-m-d')}}" type="text">
+                                            <span class="input-group-append input-group-addon">
+                                                <span class="input-group-text fa fa-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-group row">
+                                    <label class="col-md-2 col-form-label">Weight</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" name="weight" value="{{user.weight}}" data-parsley-type="number">
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-group row">
+                                    <label class="col-md-2 col-form-label">Height</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" name="height" value="{{user.height}}" data-parsley-type="number">
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-group row">
+                                    <label class="col-md-2 col-form-label">Photo</label>
+                                    <div class="col-md-6">
+                                        <img class="img-thumbnail" style="margin-bottom: 10px; max-width: 200px; height: auto;" src="{{url('/')}}{{user.photo}}" alt="photo profile">
+                                        <input style="max-width: 200px;" type="file" class="form-control" name="image">
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="card-footer text-center">
+                            <button class="btn btn-info" type="submit">Save <em class="fa fa-save"></em></button>
+                            <button class="btn btn-warning" type="button">Reset <em class="icon-refresh"></em></button>
+                        </div>
+                    </div>
+                    <!-- END card-->
+                </form>
+            </div>
+        </div>
+        <!-- END row-->
+    </div>
+</section>
+{%endblock%}
+
+{%block page_script%}
+<!-- PARSLEY-->
+<script src="{{asset('angleadmin/vendor/parsleyjs/dist/parsley.js')}}"></script>
+<!-- =============== APP SCRIPTS ===============-->
+<script src="{{asset('angleadmin/js/app.js')}}"></script>
+
+
+<!-- FILESTYLE-->
+<script src="{{asset('angleadmin/vendor/bootstrap-filestyle/src/bootstrap-filestyle.js')}}"></script>
+<!-- TAGS INPUT-->
+<script src="{{asset('angleadmin/vendor/bootstrap-tagsinput/dist/bootstrap-tagsinput.js')}}"></script>
+<!-- CHOSEN-->
+<script src="{{asset('angleadmin/vendor/chosen-js/chosen.jquery.js')}}"></script>
+<!-- SLIDER CTRL-->
+<script src="{{asset('angleadmin/vendor/bootstrap-slider/dist/bootstrap-slider.js')}}"></script>
+<!-- INPUT MASK-->
+<script src="{{asset('angleadmin/vendor/inputmask/dist/jquery.inputmask.bundle.js')}}"></script>
+<!-- WYSIWYG-->
+<script src="{{asset('angleadmin/vendor/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js')}}"></script>
+<!-- MOMENT JS-->
+<script src="{{asset('angleadmin/vendor/moment/min/moment-with-locales.js')}}"></script>
+<!-- COLORPICKER-->
+<script type="text/javascript" src="{{asset('angleadmin/vendor/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js')}}"></script>
+<!-- SELECT2-->
+<script src="{{asset('angleadmin/vendor/select2/dist/js/select2.full.js')}}"></script>
+
+
+<script>
+    $('#create-user .btn-warning').click(function(){
+        $('#create-user input, #create-user textarea').val("");
+    });
+</script>
+{%endblock%}

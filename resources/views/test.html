@@ -1,0 +1,13 @@
+<html>
+<head>
+    <title>Test</title>
+</head>
+<body>
+    {% set price = 100000 %}
+    {% set disc_price = 75000 %}
+    {% set disc = ( (price - disc_price) / price * 100 ) %}
+    <select name="price" id="price" class="form-control">
+        <option style="color: red;" value="100">100</option>
+    </select>
+</body>
+</html>
