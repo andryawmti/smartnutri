@@ -19,6 +19,6 @@ class AdminController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index(){
-        return view('partials.page_dashboard');
+        return view('admin_dashboard');
     }
 }

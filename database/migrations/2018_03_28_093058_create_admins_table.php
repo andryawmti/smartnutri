@@ -23,7 +23,6 @@ class CreateAdminsTable extends Migration
             $table->string('address');
             $table->rememberToken();
             $table->timestamps();
-            $table->string('api_token', 60);
         });
     }
 
